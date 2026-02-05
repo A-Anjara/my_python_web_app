@@ -4,20 +4,22 @@ on:
     branches: [main]
   #workflow_dispatch:
 jobs:
-  steps:
-    - name: checkout repository
-      uses: actions/checkout@v3
-    
-    - name: build docker image
-      run: |
-          docker build -t annjara/my_python_web_app .
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v3
 
-    - name: Login to Docker hub
-      uses: docker/login-action@v2
-      with:
-          username: annjara
-          password: Anjara032
+      - name: build docker image
+        run: |
+            docker build -t annjara/my_python_web_app .
 
-    - name: push to Docker hub
-      run: |
-          docker push annjara/my_python_web_app
+      - name: Login to Docker hub
+        uses: docker/login-action@v2
+        with:
+            username: annjara
+            password: Anjara032
+
+      - name: push to Docker hub
+        run: |
+            docker push annjara/my_python_web_app
