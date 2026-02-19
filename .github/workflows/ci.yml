@@ -43,8 +43,8 @@ jobs:
           TAG="latest"
           FULL_IMAGE="$DOCKERHUB_USERNAME/$IMAGE_NAME:$TAG"
           CONTAINER_NAME="flask-app"
-          NETWORK_NAME="flask-network"
-
+#          NETWORK_NAME="flask-network"
+          NETWORK_NAME="host"
           log_info() { echo "[INFO] $1"; }
           log_error() { echo "[ERROR] $1"; }
           log_success() { echo "[SUCCESS] $1"; }
@@ -59,7 +59,7 @@ jobs:
           docker rm $CONTAINER_NAME 2>/dev/null || true
 
           log_info "Création du réseau Docker (si nécessaire)..."
-          docker network create $NETWORK_NAME 2>/dev/null || true
+#          docker network create $NETWORK_NAME 2>/dev/null || true
 
           log_info "Démarrage du nouveau conteneur..."
           docker run -d \
